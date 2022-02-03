@@ -1,10 +1,10 @@
-import express from "express"
-import {addPerson, loginPerson, addPost} from "controllers"
+const express = require('express')
+const {addPersonController, loginPersonController, addPostController} = require('../controllers')
 
 const router = express.Router()
 
-router.post("/add-person", addPerson)
-router.post("/login-person", loginPerson)
-router.post("/add-post", addPost)
+router.post("/add-person", addPersonController)
+router.post("/login-person", loginPersonController)
+router.post("/add-post", addPostController)
 
-export default router
+module.exports = router

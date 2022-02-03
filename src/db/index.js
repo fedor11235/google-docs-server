@@ -1,5 +1,5 @@
 const pgp = require('pg-promise')();
-import "dotenv/config";
+require('dotenv/config');
 
 const db = pgp({
     host: process.env.DATABASE_HOST,
@@ -9,7 +9,7 @@ const db = pgp({
     password: process.env.DATABASE_PASSWORD
 })
 
-export async function addPost(content, login){
+async function addPostDb(content, login){
     const result = await db.any(
         `
         INSERT INTO posts (content, person_login) VALUES ($1, $2)
@@ -19,7 +19,7 @@ export async function addPost(content, login){
     console.log(result)
 }
 
-export async function addPerson(login, password){
+async function addPersonDb(login, password){
     const result = await db.any(
         `
         INSERT INTO persons (login, password) VALUES ($1, $2)
@@ -32,7 +32,7 @@ export async function addPerson(login, password){
 }
 
 
-export async function loginPerson(login, password){
+async function loginPersonDb(login, password){
     const result = await db.any(`
         SELECT "login" FROM "persons" WHERE LOGIN=($1) LIMIT 1;
         `
@@ -40,5 +40,7 @@ export async function loginPerson(login, password){
         )
     return result
 }
+
+module.exports =  {addPersonDb, loginPersonDb, addPostDb}
 
 

@@ -1,17 +1,17 @@
-import md5 from "md5"
-import {addPerson, loginPerson, addPost} from "controllers"
+const md5 = require('md5')
+const {addPersonDb, loginPersonDb, addPostDb}  = require( '../db' )
 
 
-export function addPost( req, res ) {
+function addPostController( req, res ) {
   const { content, login } = req.body
-  addPost({login:login, content:content})
+  addPostDb({login:login, content:content})
 
   return res.status(200).json({successfully: true})
 }
 
-export function loginPerson( req, res ) {
+function loginPersonController( req, res ) {
   const { login, password } = req.body
-  const newLogin = loginPerson({login:login, password:md5(password)})
+  const newLogin = loginPersonDb({login:login, password:md5(password)})
 
   if(newLogin===login)
     return res.status(200).json({successfully: true})
@@ -20,9 +20,9 @@ export function loginPerson( req, res ) {
     return res.status(400).json({successfully: false})
 }
 
-export function addPerson( req, res ) {
+function addPersonController( req, res ) {
   const { login, password } = req.body
-  const newLogin = addPerson({login:login, password:md5(password)})
+  const newLogin = addPersonDb({login:login, password:md5(password)})
 
   if(newLogin===login)
     return res.status(200).json({register: true})
@@ -30,3 +30,5 @@ export function addPerson( req, res ) {
   else
     return res.status(400).json({register: false})
 }
+
+module.exports =  {addPersonController, loginPersonController, addPostController}
