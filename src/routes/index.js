@@ -1,10 +1,10 @@
-import express from "express";
-import {addPerson, loginPerson, addPost} from "db";
+import express from "express"
+import {addPerson, loginPerson, addPost} from "controllers"
 
-const router = express.Router();
+const router = express.Router()
 
-router.post("/add-person", addPerson);
-router.post("/login-person", loginPerson);
-router.post("/add-post", addPost);
+router.post("/add-person", addPerson)
+router.post("/login-person", loginPerson)
+router.post("/add-post", addPost)
 
-export default router;
+export default router
