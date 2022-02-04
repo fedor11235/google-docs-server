@@ -3,8 +3,8 @@ const {addPersonController, loginPersonController, addPostController} = require(
 
 const router = express.Router()
 
-router.post("/add-person", addPersonController)
-router.post("/login-person", loginPersonController)
-router.post("/add-post", addPostController)
+router.post("/api/add-person", addPersonController)
+router.post("/api/login-person", loginPersonController)
+router.post("/api/add-post", addPostController)
 
 module.exports = router
