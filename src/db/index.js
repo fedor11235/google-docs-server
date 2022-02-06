@@ -19,24 +19,26 @@ async function addPostDb(content, login){
     console.log(result)
 }
 
-async function addPersonDb(login, password){
+async function addPersonDb(req){
+    const {login, password} = req
     const result = await db.any(
         `
         INSERT INTO persons (login, password) VALUES ($1, $2)
         ON CONFLICT(login) DO NOTHING
-        RETURNING (login);
+        RETURNING *;
         `
         , [login, password]
         )
     return result
 }
 
-
-async function loginPersonDb(login, password){
-    const result = await db.any(`
-        SELECT "login" FROM "persons" WHERE LOGIN=($1) LIMIT 1;
+async function loginPersonDb(req){
+    const { login } = req
+    const result = await db.any(
         `
-        , [login, password]
+        SELECT * FROM "persons" WHERE LOGIN=($1) LIMIT 1;
+        `
+        , [login]
         )
     return result
 }
