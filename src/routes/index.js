@@ -1,7 +1,5 @@
-const express = require('express')
 const {addPersonController, loginPersonController, addPostController} = require('../controllers')
-
-const router = express.Router()
+const router = require('express').Router()
 
 router.post("/api/add-person", addPersonController)
 router.post("/api/login-person", loginPersonController)
