@@ -12,11 +12,11 @@ async function loginPersonController( req, res ) {
   const { login, password } = req.body
   const oldPerson = await loginPersonDb({ login:login })
 
-    if( oldPerson[0]?.login === login && oldPerson[0].password === md5(password))
-      return res.status(200).json({successfully: true})
+  if( oldPerson[0]?.login === login && oldPerson[0].password === md5(password))
+    return res.status(200).json({successfully: true, id:oldPerson[0].id})
 
-    else
-      return res.status(200).json({successfully: false})
+  else
+    return res.status(200).json({successfully: false})
 }
 
 async function addPersonController( req, res ) {
