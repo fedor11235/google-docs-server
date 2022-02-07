@@ -25,7 +25,7 @@ async function addPersonController( req, res ) {
   const newPerson = await addPersonDb({login:login, password:md5(password)})
 
   if(newPerson[0]?.login === login)
-    return res.status(200).json({successfully: true})
+    return res.status(200).json({successfully: true, id:newPerson[0].id})
 
   else return res.status(200).json({successfully: false})
 }

@@ -22,8 +22,6 @@ module.exports = function (server){
 
             const arrIdElem  = []
             document.forEach(elem => {if(elem.id!=documentId) arrIdElem.push({id: elem.id})})
-
-            console.log(arrIdElem)
             
             socket.join(documentId) //присоединение к комноте с таким-то айди
             socket.emit("load-document", arrIdElem) //отправка документа клиенту

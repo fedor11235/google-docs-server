@@ -9,14 +9,14 @@ const db = pgp({
     password: process.env.DATABASE_PASSWORD
 })
 
-async function addPostDb(content, login){
+async function addPostDb(req){
+    const {content, login} = req
     const result = await db.any(
         `
         INSERT INTO posts (content, person_login) VALUES ($1, $2)
         `
         , [content, login]
         )
-    console.log(result)
 }
 
 async function addPersonDb(req){
